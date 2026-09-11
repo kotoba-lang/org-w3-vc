@@ -17,5 +17,5 @@ documents. Credential and presentation option maps use canonical document keys.
 ## Test
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
