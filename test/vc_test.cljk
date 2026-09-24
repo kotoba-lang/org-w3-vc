@@ -1,5 +1,5 @@
 (ns vc-test
-  (:require [clojure.java.io :as io]
+  (:require [kotoba.bytes :as kbytes] [clojure.java.io :as io]
             [clojure.java.shell :as shell]
             [clojure.test :refer [deftest is testing]]
             [kotoba.compiler.core :as compiler]
@@ -78,7 +78,7 @@
 (defn compiler-root []
   (nth (iterate #(.getParent ^java.nio.file.Path %)
                 (java.nio.file.Path/of (.toURI (io/resource "kotoba/compiler/core.clj")))) 4))
-(defn base64 [value] (.encodeToString (java.util.Base64/getEncoder) value))
+(defn base64 [value] (kbytes/base64-encode value))
 
 (deftest restricted-javascript-and-typed-wasm-conform-semantically
   (let [javascript (compiler/compile-source source :js-kotoba-v1)
