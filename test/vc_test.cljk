@@ -1,5 +1,5 @@
 (ns vc-test
-  (:require [kotoba.bytes :as kbytes] [clojure.java.io :as io]
+  (:require [kotoba.lang.error :as kerror] [kotoba.bytes :as kbytes] [clojure.java.io :as io]
             [kotoba.process :as shell]
             [kotoba.test :refer [deftest is testing]]
             [kotoba.compiler.core :as compiler]
@@ -72,7 +72,7 @@
       (is (= (dvec (dmap {:error (dkw :vc/unknown-document-type)}))
              (call kir 'errors (dmap {})))))
     (testing "constructor boundaries reject malformed option documents"
-      (is (thrown? clojure.lang.ExceptionInfo
+      (is (thrown? kerror/ExceptionInfo
                    (call kir 'credential (dvec)))))))
 
 (defn compiler-root []
